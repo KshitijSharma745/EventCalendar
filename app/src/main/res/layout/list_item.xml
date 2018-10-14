@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="hey"
-
-        android:id="@+id/ev"
+        android:text="hey"
+        android:textColor="#000000"
+        android:layout_weight="2"
+        android:textStyle="bold"
         />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/start_time"
+        android:text="16;00"
+        android:layout_width="wrap_content"
+        android:textColor="#000000"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/end_time"
+        android:text="18:00"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
 
 
 
 </LinearLayout>
+</android.support.constraint.ConstraintLayout>
