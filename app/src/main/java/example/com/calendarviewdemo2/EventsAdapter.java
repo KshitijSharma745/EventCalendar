@@ -11,9 +11,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class EventsAdapter extends ArrayAdapter<Event> {
-    public EventsAdapter(Context context, ArrayList<Event> events) {
 
-        super(context,0,events);
+    private int resourceLayout;
+    private Context mContext;
+
+    public EventsAdapter(Context context, int resource, ArrayList<Event> events) {
+
+        super(context,resource,events);
+        this.resourceLayout = resource;
+        this.mContext = context;
     }
 
 
@@ -24,8 +30,8 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         View listItemView = convertView;
         if(listItemView == null) {
             try {
-                listItemView = LayoutInflater.from (getContext ()).inflate (
-                        R.layout.list_item, parent, false);
+                listItemView = LayoutInflater.from (mContext).inflate (
+                        resourceLayout, parent, false);
             }
             catch (RuntimeException e) {
                 Log.d ("EventAdapter", "there is error");
