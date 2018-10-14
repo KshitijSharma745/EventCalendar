@@ -10,15 +10,16 @@ import java.util.ArrayList;
 
 public class EventLoader extends AsyncTaskLoader<ArrayList<Event>>{
 
-    public static final String eventsApi = "https://csievent.herokuapp.com/api/event";
+    public String eventsApi = "https://csievent.herokuapp.com/api/event";
 
-    public EventLoader(@NonNull Context context) {
+    public EventLoader(@NonNull Context context)
+    {
         super(context);
     }
 
     @Override
     protected void onStartLoading() {
-        Log.i("message","I am in OnStartLoading");
+        Log.i("hello","I am in OnStartLoading");
 
         forceLoad();
     }
@@ -26,7 +27,7 @@ public class EventLoader extends AsyncTaskLoader<ArrayList<Event>>{
     @Nullable
     @Override
     public ArrayList<Event> loadInBackground() {
-        Log.i("message","I am in LoadInBackgroung");
+        Log.i("hello","I am in LoadInBackgroung");
         MainActivity.events = Utils.fetchEvents(eventsApi);
 
         return MainActivity.events;

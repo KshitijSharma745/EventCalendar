@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,20 +20,29 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Event>>{
 
     public static ArrayList<Event> events;
+
     ListView listView;
+    CalendarView calendarView;
+    ProgressBar progressBar;
+    TextView textView4;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CalendarView calendarView = findViewById(R.id.calendarView);
+        calendarView = findViewById(R.id.calendarView);
+        listView = (ListView) findViewById(R.id.list);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textView4 = (TextView)findViewById(R.id.textView4);
+        button = (Button) findViewById(R.id.button);
 
         if(calendarView!=null){
             calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -44,28 +54,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             });
         }
 
-        listView = (ListView) findViewById(R.id.list);
 
-        boolean b = isNetworkAvailable(this);
 
-        if(!b){
-            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.INVISIBLE);
-            TextView textView4 = (TextView)findViewById(R.id.textView4);
-            textView4.setText("NO INTERNET CONNECTION");
-            Button button = (Button) findViewById(R.id.button);
-            button.setVisibility(View.VISIBLE);
-        }
-        else{
-            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.VISIBLE);
-            Button button = (Button) findViewById(R.id.button);
-            button.setVisibility(View.INVISIBLE);
-            TextView textView4 = (TextView) findViewById(R.id.textView4);
-            textView4.setVisibility(View.INVISIBLE);
-            getSupportLoaderManager().initLoader(0, null, this);
-
-        }
+        Retry(listView);
     }
 
     public boolean isNetworkAvailable(Context context){
@@ -77,27 +68,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
    @Override
     public Loader<ArrayList<Event>> onCreateLoader(int i,@Nullable Bundle args) {
-        Log.i("message","I am in OnCreateLoader");
-        return new EventLoader(MainActivity.this);
+        Log.i("hello","I am in OnCreateLoader");
+        return new EventLoader(this);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<Event>> loader, ArrayList<Event> events) {
 
-        TextView textView4 = (TextView)findViewById(R.id.textView4);
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
         progressBar.setVisibility(View.INVISIBLE);
 
-        Log.i("message","I am in OnLoadfinished");
+        Log.i("hello","I am in OnLoadfinished");
 
         if(events == null){
-            Log.i("error","onPostExecute()");
+            Log.i("merror","null data in onLoadFinished");
             return;
         }
-        EventsAdapter adapter = new EventsAdapter(getApplicationContext(),events);
+        EventsAdapter adapter = new EventsAdapter(getApplicationContext(),R.layout.list_item,events);
         if(adapter == null){
-            Log.i("error","null adapter");
+            Log.i("merror","null adapter");
         }
 
         listView.setAdapter(adapter);
@@ -115,11 +106,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(@NonNull Loader<ArrayList<Event>> loader) {
 
-        Log.i("message", "I am in onLoaderReset");
+        Log.i("hello", "I am in onLoaderReset");
         getSupportLoaderManager().restartLoader(0, null,  this);
 
     }
 
     public void Retry(View view) {
+
+        boolean b = isNetworkAvailable(this);
+
+        if(!b){
+
+            progressBar.setVisibility(View.INVISIBLE);
+            textView4.setText("NO INTERNET CONNECTION");
+            Button button = (Button) findViewById(R.id.button);
+            button.setVisibility(View.VISIBLE);
+            calendarView.setVisibility(View.INVISIBLE);
+        }
+        else{
+
+            progressBar.setVisibility(View.VISIBLE);
+            button.setVisibility(View.INVISIBLE);
+            textView4.setVisibility(View.INVISIBLE);
+            getSupportLoaderManager().initLoader(0, null, this);
+
+        }
     }
 }

@@ -20,11 +20,12 @@ public class Utils {
     public static ArrayList<Event> fetchEvents(String requestUrl){
         String jsonResponse = "";
 
+        URL url = null;
         try{
-            URL url = new URL(requestUrl);
+            url = new URL(requestUrl);
             jsonResponse = makeHttpRequest(url);
         } catch (MalformedURLException e) {
-            Log.i("error","creating url");
+            Log.i("merror","creating url");
               e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,15 +41,17 @@ public class Utils {
             return null;
 
         try {
-            JSONArray arr = new JSONArray();
+            JSONArray arr = new JSONArray(jsonResponse);
+            Log.i("hello",arr.length()+"");
+            Log.i("hello","JSON array length - "+arr.length());
             for(int i = 0; i<arr.length(); ++i){
                 JSONObject properties = arr.getJSONObject(i);
 
                 int id = properties.getInt("id");
                 String name = properties.getString("name");
                 String orgSociety = properties.getString("orgSociety");
-                String details = properties.getString("Details");
-                String location = properties.getString("nsit campus");
+                String details = properties.getString("details");
+                String location = properties.getString("location");
                 String link = properties.getString("link");
                 String createdAt = properties.getString("createdAt");
                 String updatedAt = properties.getString("updatedAt");
@@ -59,6 +62,7 @@ public class Utils {
                 String starttime = properties.getString("starttime");
                 String endtime = properties.getString("endtime");
 
+                Log.i("JSON data",name +" " + orgSociety + " ");
                 events.add(new Event(id,name,startdate,enddate,starttime,endtime,orgSociety,details,location,link,createdAt,updatedAt));
             }
         } catch (JSONException e) {
@@ -81,19 +85,24 @@ public class Utils {
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
 
-            if(urlConnection.getResponseCode() == 200) {
+
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }
+
 
         } catch (IOException e) {
+            Log.i("merror","getting URLConnection");
             e.printStackTrace();
         }
         finally {
             if(urlConnection != null)
                 urlConnection.disconnect();
             if(inputStream != null)
-                inputStream.close();
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
         return jsonResponse;
     }
@@ -117,6 +126,7 @@ public class Utils {
             }
         }
         catch (IOException e) {
+            Log.i("merror","reader.readLine()");
             e.printStackTrace();
         }
         return output.toString();
