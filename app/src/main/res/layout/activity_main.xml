@@ -60,15 +60,28 @@
         android:layout_margin="5dp"
         android:layout_gravity="top">
     </CalendarView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="2">
+
     <ListView
         android:id="@+id/list"
         android:orientation="vertical"
-        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_height="0dp"
-        android:background="@color/def"/>
-
+        android:background="@color/def"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/oh_snap"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="center"
+        />
+    </RelativeLayout>
 </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
