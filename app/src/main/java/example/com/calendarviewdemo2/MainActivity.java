@@ -180,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
 
             date = date.substring(0,index);
+            clickedDate = convertTOInt(date.substring(0,2));
+            listView.setBackgroundColor (getDayColor (clickedDate));
             str = date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2);
 
             Log.i("hello",str);
