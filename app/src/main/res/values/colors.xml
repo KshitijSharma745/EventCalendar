@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="day_1">#AB47BC</color>
+    <color name="day_2">#880E4F</color>
+    <color name="day_3">#42A5F5</color>
+    <color name="day_4">#FF7043</color>
+    <color name="day_5">#8D6E63</color>
+    <color name="day_6">#26A69A</color>
+    <color name="day_7">#FFCA28</color>
+    <color name="def">#ECEFF1</color>
 </resources>
