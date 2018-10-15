@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
             tools:text="start" />
 
@@ -28,7 +28,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text=" presents "
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
             tools:text="hey" />
         <TextView
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
 
             tools:text="start" />
@@ -92,7 +92,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
 
             tools:text="hey" />
@@ -107,7 +107,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
 
             tools:text="start" />
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Details"
-        android:textColor="R.color.black" />
+        android:textColor="#000000" />
 
     <ScrollView
 
@@ -145,7 +145,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
             android:text="Location"
             android:layout_gravity="center"/>
@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
                  android:layout_gravity="center"
 
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
             tools:text="start" />
 
@@ -175,7 +175,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="R.color.black"
+            android:textColor="#000000"
             android:textSize="15sp"
             android:text="For more info-"
             />
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:textColor="R.color.blue"
+            android:textColor="#BBDEFB"
             android:textSize="15sp"
             android:textStyle="italic"
             tools:text="start" />
