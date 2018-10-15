@@ -11,6 +11,8 @@ public class information extends AppCompatActivity {
         setContentView(R.layout.activity_information);
         int position = getIntent().getIntExtra("position",0);
 
-        Event event = MainActivity.events.get(position);
+        Event event = MainActivity.selectedday.get(position);
+
+
     }
 }

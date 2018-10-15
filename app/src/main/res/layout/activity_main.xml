@@ -70,6 +70,7 @@
         android:id="@+id/list"
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:background="@color/def"
         android:layout_height="match_parent"/>
     <ImageView
         android:id="@+id/image_view"
