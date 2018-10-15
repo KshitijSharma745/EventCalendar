@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
+import static java.security.AccessController.getContext;
+
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Event>>{
 
@@ -32,7 +35,41 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ProgressBar progressBar;
     TextView textView4;
     Button button;
+    int date;
 
+    private int getDayColor(int da) {
+        int dayColorResourceId;
+        int test=da%7;
+        Log.d ("mainSwitch"," test "+test);
+        switch ((test)) {
+            case 0:
+                dayColorResourceId = R.color.day_1;
+                break;
+            case 1:
+                dayColorResourceId = R.color.day_2;
+                break;
+            case 2:
+                dayColorResourceId = R.color.day_3;
+                break;
+            case 3:
+                dayColorResourceId = R.color.day_4;
+                break;
+            case 4:
+                dayColorResourceId = R.color.day_5;
+                break;
+            case 5:
+                dayColorResourceId = R.color.day_6;
+                break;
+            case 6:
+                dayColorResourceId = R.color.day_7;
+                break;
+
+            default:
+                dayColorResourceId = R.color.def;
+                break;
+        }
+        return ContextCompat.getColor(this, dayColorResourceId);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +87,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                     String msg = "Selected date is "+dayOfMonth +"/"+(month+1)+"/"+year;
                     Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+                    date=dayOfMonth;
+                    Log.d ("mainActivity",date+" ");
+                    listView.setBackgroundColor (getDayColor (date));
+                    Log.d ("mainActivity",date+" this is after color ");
                 }
             });
         }
+
 
 
 
