@@ -24,10 +24,10 @@ public class information extends AppCompatActivity {
         title.setText (event.getName ());
 
         TextView startd=(TextView) findViewById (R.id.start_date_i);
-        startd.setText (event.getStartDate ());
+        startd.setText (event.getStartDate().substring(0,10));
 
         TextView endd=(TextView) findViewById (R.id.end_date_i);
-        endd.setText (event.getEndDate ());
+        endd.setText (event.getEndDate().substring(0,10));
 
         TextView startt=(TextView) findViewById (R.id.start_time_i);
         startt.setText (event.getStartTime ());

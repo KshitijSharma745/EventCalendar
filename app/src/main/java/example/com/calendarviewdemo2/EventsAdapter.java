@@ -48,7 +48,7 @@ public class EventsAdapter extends ArrayAdapter<Event> {
         TextView startTime = (TextView) listItemView.findViewById(R.id.start_time);
         TextView endTime = (TextView) listItemView.findViewById(R.id.end_time);
 
-        startTime.setText(currentEvent.getStartTime());
+        startTime.setText(currentEvent.getStartTime() + " - ");
         endTime.setText(currentEvent.getEndTime());
 
         return listItemView;

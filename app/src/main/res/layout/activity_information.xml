@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="#000000"
-            android:textSize="15sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
             tools:text="start" />
 
         <TextView
@@ -119,6 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Details"
+        android:textStyle="bold"
         android:textColor="#000000" />
 
     <ScrollView
@@ -148,6 +150,7 @@
             android:textColor="#000000"
             android:textSize="15sp"
             android:text="Location"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
 
         <TextView
@@ -175,9 +178,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="#00B0FF"
             android:textSize="15sp"
             android:text="For more info-"
+
             />
 
         <TextView
