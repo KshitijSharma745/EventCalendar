@@ -1,7 +1,10 @@
 package example.com.calendarviewdemo2;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,6 +13,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -120,52 +124,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         if(calendarView!=null){
-            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                @Override
-                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
-                    ++month;
-                    selectedday.clear();
-                    String msg = "Selected date is "+dayOfMonth +"/"+(month)+"/"+year;
-                    if(dayOfMonth<10){
-
-                        if(month<10){
-                            date = year+"-0"+(month)+"-0"+dayOfMonth;
-                        }
-                        else{
-                            date = year+"-"+(month)+"-0"+dayOfMonth;
-                        }
-                    }
-                    else{
-
-                        if(month<10){
-                            date = year+"-0"+(month)+"-"+dayOfMonth;
-                        }
-                        else{
-                            date = year+"-"+(month)+"-"+dayOfMonth;
-                        }
-                    }
-
-
-                    getEventsInSelectedday();
-                    if(selectedday==null||selectedday.size()==0){
-                        sorryNoEvents();
-                    }
-                    else{
-                        gotEvents();
-                    }
-                    print();
-                    //Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
-
-                    //String msg = "Selected date is "+dayOfMonth +"/"+(month+1)+"/"+year;
-                    //Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
-                    clickedDate=dayOfMonth;
-                    //Log.d ("mainActivity",date+" ");
-                    listView.setBackgroundColor (getDayColor (clickedDate));
-                    //Log.d ("mainActivity",date+" this is after color ");
-
-                }
-            });
             long todaydate = calendarView.getDate();
 
             Date dateObject = new Date(todaydate);
@@ -182,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             date = date.substring(0,index);
             clickedDate = convertTOInt(date.substring(0,2));
             listView.setBackgroundColor (getDayColor (clickedDate));
+           // appbarSetColor(getDayColor (clickedDate));
             str = date.substring(6,10)+"-"+date.substring(3,5)+"-"+date.substring(0,2);
 
             Log.i("hello",str);
@@ -192,6 +152,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Retry(listView);
     }
+
+//    private void appbarSetColor(int dayColor) {
+//        ActionBar actionBar;
+//
+//        actionBar = getActionBar();
+//        ColorDrawable colorDrawable = new ColorDrawable(dayColor);
+//        actionBar.setBackgroundDrawable(colorDrawable);
+//        //Color.parseColor("#93E9FA")
+//    }
 
     private void print() {
         for(int i = 0; i<selectedday.size(); ++i){
@@ -216,6 +185,54 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<ArrayList<Event>> loader, ArrayList<Event> events) {
 
         progressBar.setVisibility(View.INVISIBLE);
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+
+                ++month;
+                selectedday.clear();
+                String msg = "Selected date is "+dayOfMonth +"/"+(month)+"/"+year;
+                if(dayOfMonth<10){
+
+                    if(month<10){
+                        date = year+"-0"+(month)+"-0"+dayOfMonth;
+                    }
+                    else{
+                        date = year+"-"+(month)+"-0"+dayOfMonth;
+                    }
+                }
+                else{
+
+                    if(month<10){
+                        date = year+"-0"+(month)+"-"+dayOfMonth;
+                    }
+                    else{
+                        date = year+"-"+(month)+"-"+dayOfMonth;
+                    }
+                }
+
+
+                getEventsInSelectedday();
+                if(selectedday==null||selectedday.size()==0){
+                    sorryNoEvents();
+                }
+                else{
+                    gotEvents();
+                }
+                print();
+                //Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+
+                //String msg = "Selected date is "+dayOfMonth +"/"+(month+1)+"/"+year;
+                //Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+                clickedDate=dayOfMonth;
+                //Log.d ("mainActivity",date+" ");
+                listView.setBackgroundColor (getDayColor (clickedDate));
+                // appbarSetColor(getDayColor (clickedDate));
+                //Log.d ("mainActivity",date+" this is after color ");
+
+            }
+        });
 
         Log.i("hello","I am in OnLoadfinished");
 
