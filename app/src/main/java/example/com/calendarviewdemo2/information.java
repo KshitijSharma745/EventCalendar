@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class information extends AppCompatActivity {
 
         TextView dett=(TextView) findViewById (R.id.det);
         dett.setText (event.getDetails ());
+        dett.setMovementMethod (new ScrollingMovementMethod ());
 
         TextView locc=(TextView) findViewById (R.id.loc);
         locc.setText (event.getLocation ());
