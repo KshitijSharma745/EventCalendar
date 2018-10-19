@@ -187,6 +187,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<Event>> loader, ArrayList<Event> events) {
 
+        Log.i("hello","I am in OnLoadfinished");
+
+        if(events == null){
+            Log.i("merror","null data in onLoadFinished");
+            Retry2();
+            return;
+        }
         progressBar.setVisibility(View.INVISIBLE);
         calendarView.setVisibility(View.VISIBLE);
         calendarView.setEnabled(true);
@@ -240,12 +247,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        Log.i("hello","I am in OnLoadfinished");
 
-        if(events == null){
-            Log.i("merror","null data in onLoadFinished");
-            return;
-        }
         getEventsInSelectedday();
         if(selectedday==null||selectedday.size()==0){
             sorryNoEvents();
