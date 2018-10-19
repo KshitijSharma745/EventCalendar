@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/blue"
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="start" />

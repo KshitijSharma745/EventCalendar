@@ -50,11 +50,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     String date;
     ImageView imageView;
     String str;
-
+    TextView calendarTv;
     EventsAdapter adapter;
 
     public static ArrayList<Event> selectedday;
-
 
     int clickedDate;
 
@@ -103,11 +102,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         textView4 = (TextView)findViewById(R.id.textView4);
         button = (Button) findViewById(R.id.button);
         imageView = (ImageView) findViewById(R.id.image_view);
+        calendarTv = (TextView) findViewById(R.id.calendarTv);
 
         imageView.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.VISIBLE);
         selectedday = new ArrayList<Event>();
-
+        calendarView.setEnabled(false);
+        calendarView.setVisibility(View.INVISIBLE);
+        calendarTv.setVisibility(View.INVISIBLE);
         //selectedday.clear();
         str = null;
         date = null;
@@ -178,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
    @Override
     public Loader<ArrayList<Event>> onCreateLoader(int i,@Nullable Bundle args) {
         Log.i("hello","I am in OnCreateLoader");
+        Retry2();
         return new EventLoader(this);
     }
 
@@ -185,7 +188,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<ArrayList<Event>> loader, ArrayList<Event> events) {
 
         progressBar.setVisibility(View.INVISIBLE);
-
+        calendarView.setVisibility(View.VISIBLE);
+        calendarView.setEnabled(true);
+        calendarTv.setVisibility(View.INVISIBLE);
+        Retry2();
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -252,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void sorryNoEvents(){
 
+        Retry2();
         listView.setVisibility(View.INVISIBLE);
         imageView.setVisibility(View.VISIBLE);
 
@@ -259,12 +266,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void gotEvents() {
+        Retry2();
         imageView.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
     }
 
     private void getEventsInSelectedday() {
+        Retry2();
         selectedday.clear();
         if(date == null)
         {
@@ -315,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
     @Override
     public void onLoaderReset(@NonNull Loader<ArrayList<Event>> loader) {
-
+        Retry2();
         Log.i("hello", "I am in onLoaderReset");
         getSupportLoaderManager().restartLoader(0, null,  this);
 
@@ -332,16 +341,32 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             Button button = (Button) findViewById(R.id.button);
             button.setVisibility(View.VISIBLE);
             calendarView.setVisibility(View.INVISIBLE);
+            calendarView.setEnabled(false);
             listView.setVisibility(View.INVISIBLE);
         }
         else{
             calendarView.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
             button.setVisibility(View.INVISIBLE);
+            calendarView.setEnabled(true);
             textView4.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
             getSupportLoaderManager().initLoader(0, null, this);
 
+        }
+    }
+    private void Retry2(){
+        boolean b = isNetworkAvailable(this);
+
+        if(!b){
+
+            progressBar.setVisibility(View.INVISIBLE);
+            textView4.setText("NO INTERNET CONNECTION");
+            Button button = (Button) findViewById(R.id.button);
+            button.setVisibility(View.VISIBLE);
+            calendarView.setVisibility(View.INVISIBLE);
+            calendarView.setEnabled(false);
+            listView.setVisibility(View.INVISIBLE);
         }
     }
 }

@@ -52,14 +52,30 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
         >
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="5dp"
+    android:layout_gravity="top">
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_margin="5dp"
-        android:layout_gravity="top">
+        android:layout_height="match_parent"
+
+       >
     </CalendarView>
+
+    <TextView
+        android:id="@+id/calendarTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Calenadar will appear here"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp" />
+</RelativeLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
